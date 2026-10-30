@@ -29,14 +29,11 @@ Improvements Facebook Page. It already is if Metricool and Zoho can post to it.
    "Henry Stories" app, set expiry to **Never**, and tick these permissions:
    `instagram_basic`, `instagram_content_publish`, `pages_show_list`,
    `pages_read_engagement`, `business_management`. Copy the token.
-4. **Find the Instagram user ID.** Open this in a browser with your token pasted in:
-   `https://graph.facebook.com/v21.0/me/accounts?fields=name,instagram_business_account&access_token=YOUR_TOKEN`
-   The number under `instagram_business_account` → `id` is the IG user ID.
-5. **Add GitHub secrets.** In this repo, open Settings, then Secrets and
-   variables, then Actions, then New repository secret. Add:
-   - `IG_ACCESS_TOKEN`: the token from step 3
-   - `IG_USER_ID`: the number from step 4
-6. **Turn on Actions.** Open the Actions tab and enable workflows if asked.
+4. **Add the GitHub secret.** In this repo, open Settings, then Secrets and
+   variables, then Actions, then New repository secret. Add
+   `IG_ACCESS_TOKEN` with the token from step 3. The script finds the
+   Instagram account on its own. (`IG_USER_ID` is optional.)
+5. **Turn on Actions.** Open the Actions tab and enable workflows if asked.
 
 ## Test it
 Put one image in `images/`, add a schedule line a few minutes in the past, then

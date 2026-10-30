@@ -62,9 +62,23 @@ def publish(story):
     return api("POST", f"{IG_USER_ID}/media_publish", {"creation_id": container})["id"]
 
 
+def find_ig_user_id():
+    """Look up the Instagram account linked to the token's Facebook Page."""
+    pages = api("GET", "me/accounts", {"fields": "name,instagram_business_account"}).get("data", [])
+    for page in pages:
+        ig = page.get("instagram_business_account")
+        if ig:
+            print(f"Using Instagram account {ig['id']} (linked to Page {page['name']})")
+            return ig["id"]
+    sys.exit("No Instagram business account found on the token's Pages")
+
+
 def main():
-    if not DRY_RUN and not (TOKEN and IG_USER_ID):
-        sys.exit("Missing IG_ACCESS_TOKEN or IG_USER_ID secret")
+    global IG_USER_ID
+    if not DRY_RUN and not TOKEN:
+        sys.exit("Missing IG_ACCESS_TOKEN secret")
+    if not DRY_RUN and not IG_USER_ID:
+        IG_USER_ID = find_ig_user_id()
     schedule = json.load(open("schedule.json"))
     posted = json.load(open("posted.json")) if os.path.exists("posted.json") else {}
     now = datetime.now(timezone.utc)
