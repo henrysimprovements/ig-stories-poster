@@ -1,0 +1,34 @@
+name: Post Instagram Stories
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 minutes (GitHub may run a few minutes late)
+  workflow_dispatch:          # "Run workflow" button for a manual run
+
+permissions:
+  contents: write             # lets the job save posted.json back to the repo
+
+concurrency:
+  group: post-stories
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Post due stories
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: python post_stories.py
+      - name: Save posted log
+        if: always()
+        run: |
+          git config user.name "stories-bot"
+          git config user.email "stories-bot@users.noreply.github.com"
+          git add posted.json
+          git diff --cached --quiet || (git commit -m "Log posted stories" && git push)
