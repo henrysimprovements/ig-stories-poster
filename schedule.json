@@ -68,5 +68,20 @@
     "id": "2026-11-09-2100-remodel-budget",
     "post_at": "2026-11-09T21:00:00-05:00",
     "image": "images/14-sun-9pm-remodel-budget.png"
+  },
+  {
+    "id": "2026-11-16-1200-chimney",
+    "post_at": "2026-11-16T12:00:00-05:00",
+    "image": "images/15-mon-nov16-chimney.png"
+  },
+  {
+    "id": "2026-11-18-1200-holiday-lights",
+    "post_at": "2026-11-18T12:00:00-05:00",
+    "image": "images/16-wed-nov18-holiday-lights.png"
+  },
+  {
+    "id": "2026-11-19-1200-grease",
+    "post_at": "2026-11-19T12:00:00-05:00",
+    "image": "images/17-thu-nov19-grease.png"
   }
 ]
