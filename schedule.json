@@ -98,5 +98,20 @@
     "id": "2026-11-28-1200-ice-melt",
     "post_at": "2026-11-28T12:00:00-05:00",
     "image": "images/20-sat-nov28-ice-melt.jpg"
+  },
+  {
+    "id": "2026-12-01-1200-water-heater",
+    "post_at": "2026-12-01T12:00:00-05:00",
+    "image": "images/21-tue-dec1-water-heater.jpg"
+  },
+  {
+    "id": "2026-12-03-1200-window-condensation",
+    "post_at": "2026-12-03T12:00:00-05:00",
+    "image": "images/22-thu-dec3-window-condensation.jpg"
+  },
+  {
+    "id": "2026-12-05-1200-gfci",
+    "post_at": "2026-12-05T12:00:00-05:00",
+    "image": "images/23-sat-dec5-gfci.jpg"
   }
 ]
