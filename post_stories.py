@@ -1,7 +1,8 @@
 """Post due Instagram Stories from schedule.json using the Instagram Graph API.
 
 Runs from GitHub Actions every 15 minutes. A story is "due" when its post_at time
-has passed and its id is not yet in posted.json. Images must be public URLs
+has passed, its id is not yet in posted.json, and it is not held with
+"approved": false (see approve_stories.py). Images must be public URLs
 (the raw GitHub URL of a file in images/ works when the repo is public).
 """
 import json
@@ -86,6 +87,9 @@ def main():
     for story in schedule:
         sid = story["id"]
         if sid in posted:
+            continue
+        if story.get("approved") is False:  # held until "Approve stories" runs
+            print(f"HOLD {sid}: waiting for approval")
             continue
         when = datetime.fromisoformat(story["post_at"])
         if when > now:

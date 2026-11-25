@@ -9,8 +9,11 @@ so Metricool's free 20 posts a month can all go to TikTok.
    `-05:00` Eastern offset), and the image path.
 3. Every 15 minutes GitHub runs `post_stories.py`. It posts anything that is due
    and writes it to `posted.json`, so nothing posts twice.
-4. Nothing posts unless it is in `schedule.json`, and Claude only adds stories
-   after Javier approves them.
+4. Nothing posts unless it is in `schedule.json`. Claude adds each week's stories
+   with `"approved": false`, so they are held.
+5. To approve: Actions tab, then **Approve stories**, then **Run workflow**. Type
+   the Monday of the week (like `2026-12-07`) or leave it blank to approve every
+   held story. Held stories never post until this runs.
 
 The repo must be **public** so Instagram can fetch the images from GitHub. The
 access token stays private in GitHub Secrets and is never in the code.

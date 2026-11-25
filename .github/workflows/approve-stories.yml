@@ -1,0 +1,35 @@
+name: Approve stories
+
+on:
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "Monday of the week to approve (YYYY-MM-DD). Leave blank to approve every held story."
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: post-stories
+  cancel-in-progress: false
+
+jobs:
+  approve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Approve held stories
+        env:
+          WEEK: ${{ inputs.week }}
+        run: python approve_stories.py
+      - name: Save schedule
+        run: |
+          git config user.name "stories-bot"
+          git config user.email "stories-bot@users.noreply.github.com"
+          git add schedule.json
+          git diff --cached --quiet || (git commit -m "Approve held stories" && git push)
